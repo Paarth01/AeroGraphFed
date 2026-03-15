@@ -1,0 +1,9 @@
+year
+log_population
+pm25_lag1
+pm25_lag2
+pm25_roll3_mean
+pm25_roll3_std
+pm25_growth
+MODIS_AOD_PROXY
+sat_pm25_growth

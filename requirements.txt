@@ -1,0 +1,9 @@
+pandas
+numpy
+netCDF4
+scikit-learn
+torch
+torch-geometric
+flask
+streamlit
+requests
