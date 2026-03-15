@@ -47,7 +47,9 @@ AeroGraphFed/
 ├── src/                      
 │   ├── extract_satellite_features.py  # Pipeline to extract CIESIN GeoTIFFs to tabular data using Geopandas
 │   ├── backend_model.py               # The core XGBoost Training Pipeline & Validation
-│   └── generate_forecast_maps.py      # Map generation script for static and dynamic plots
+│   ├── generate_forecast_maps.py      # Map generation script for static and dynamic plots
+│   ├── eda_satellite.py               # Exploratory data analysis for satellite features
+│   └── feature_engineering.py         # Feature processing and transformation utilities
 │
 └── README.md                 # Project documentation
 ```
@@ -62,6 +64,11 @@ You need Python 3.9+ installed. Install the required spatial and machine learnin
 
 ```bash
 pip install pandas numpy xgboost scikit-learn shap plotly geopandas rasterstats streamlit matplotlib joblib kaleido
+```
+
+Alternatively, install from the provided requirements file:
+```bash
+pip install -r requirements.txt
 ```
 
 ### 1. Extract Satellite Features (Optional)
@@ -95,3 +102,52 @@ streamlit run dashboard/app.py
 - **Ground PM2.5 & Population**: Curated historical global population-weighted datasets.
 - **Satellite PM2.5 Proxy**: [CIESIN SEDAC Global Annual PM2.5 Grids from MODIS, MISR and SeaWiFS Aerosol Optical Depth (AOD)](https://sedac.ciesin.columbia.edu/data/set/sdei-global-annual-gwr-pm2-5-modis-misr-seawifs-aod-v4-gl-03).
 - **Cartography**: `NaturalEarth` datasets used for spatial rendering and zonal boundary extraction.
+
+---
+
+## 🤝 Contributing
+
+This project is designed for research and educational purposes. Contributions are welcome for:
+
+- **Model Improvements**: Enhanced algorithms, additional features
+- **Data Sources**: Integration of new satellite or ground-based datasets  
+- **Visualization**: Advanced mapping techniques and interactive features
+- **Documentation**: Improving code comments and examples
+
+---
+
+## 📈 Model Performance
+
+The XGBoost model achieves strong predictive performance with:
+- **Temporal Cross-Validation**: Prevents data leakage across time periods
+- **Feature Importance**: SHAP-based explainability for transparent predictions
+- **Regularization**: Early stopping and dropout constraints to prevent overfitting
+
+---
+
+## 🧪 Technical Details
+
+### Model Architecture
+- **Algorithm**: XGBoost Regressor with optimized hyperparameters
+- **Validation**: TimeSeriesSplit cross-validation (temporal awareness)
+- **Features**: Satellite AOD proxies, population metrics, temporal lags, rolling statistics
+
+### Data Processing Pipeline
+1. **Satellite Feature Extraction**: GeoTIFF to tabular conversion using geopandas
+2. **Feature Engineering**: Temporal lags, rolling means, demographic growth rates
+3. **Quality Control**: Automated data validation and missing value handling
+
+---
+
+## 📄 License
+
+This project is provided for research and educational purposes. Please ensure compliance with data source licenses when using satellite datasets.
+
+---
+
+## 🔗 Related Resources
+
+- [CIESIN SEDAC Data Portal](https://sedac.ciesin.columbia.edu/)
+- [NASA Earth Data](https://earthdata.nasa.gov/)
+- [XGBoost Documentation](https://xgboost.readthedocs.io/)
+- [SHAP Library](https://github.com/slundberg/shap)
